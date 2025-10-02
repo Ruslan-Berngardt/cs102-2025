@@ -1,2 +1,6 @@
+'''Возвращение текста'''
 def text():
-    return message
+    '''Возвращает текст'''
+    message = input()
+    n = message
+    return n
