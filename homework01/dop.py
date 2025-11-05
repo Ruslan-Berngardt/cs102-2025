@@ -1,6 +1,8 @@
-'''Has a module that encrypts the text'''
+"""Has a module that encrypts the text"""
+
+
 def encrypt_growing_shift(plaintext, start, delta):
-    '''Encrypts the text'''
+    """Encrypts the text"""
     alphabet_lower = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
     alphabet_upper = alphabet_lower.upper()
     result = []
@@ -18,4 +20,4 @@ def encrypt_growing_shift(plaintext, start, delta):
             shift += delta
         else:
             result.append(char)
-    return ''.join(result)
+    return "".join(result)
