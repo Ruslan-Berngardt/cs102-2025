@@ -1,5 +1,6 @@
 import pathlib
 import typing as tp
+import random
 
 T = tp.TypeVar("T")
 
@@ -193,7 +194,18 @@ def generate_sudoku(N: int) -> tp.List[tp.List[str]]:
     >>> check_solution(solution)
     True
     """
-    pass
+    grid = [['.' for _ in range(9)] for _ in range(9)]
+    solution = solve(grid)
+    if not solution:
+        raise ValueError("Failed to generate a valid Sudoku.")
+
+    cells = [(i, j) for i in range(9) for j in range(9)]
+    random.shuffle(cells)
+
+    for i, j in cells[:81 - N]:
+        solution[i][j] = '.'
+
+    return solution
 
 
 if __name__ == "__main__":
