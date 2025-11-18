@@ -148,8 +148,28 @@ def solve(grid: tp.List[tp.List[str]]) -> tp.Optional[tp.List[tp.List[str]]]:
 
 def check_solution(solution: tp.List[tp.List[str]]) -> bool:
     """ Если решение solution верно, то вернуть True, в противном случае False """
-    # TODO: Add doctests with bad puzzles
-    pass
+    size = len(solution)
+    block_size = int(size ** 0.5)
+
+    for row in solution:
+        if len(set(row)) != size or '.' in set(row):
+            return False
+
+    for col in range(size):
+        column = [solution[row][col] for row in range(size)]
+        if len(set(column)) != size or '.' in set(column):
+            return False
+
+    for block_row in range(0, size, block_size):
+        for block_col in range(0, size, block_size):
+            block = []
+            for i in range(block_row, block_row + block_size):
+                for j in range(block_col, block_col + block_size):
+                    block.append(solution[i][j])
+            if len(set(block)) != size or '.' in set(block):
+                return False
+
+    return True
 
 
 def generate_sudoku(N: int) -> tp.List[tp.List[str]]:
