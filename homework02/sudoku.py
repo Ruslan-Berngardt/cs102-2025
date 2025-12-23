@@ -92,9 +92,9 @@ def find_empty_positions(grid: tp.List[tp.List[str]]) -> tp.Optional[tp.Tuple[in
     >>> find_empty_positions([['1', '2', '3'], ['4', '5', '6'], ['.', '8', '9']])
     (2, 0)
     """
-    for i in range(len(grid)):
-        for j in range(len(grid[i])):
-            if grid[i][j] == ".":
+    for i, row in enumerate(grid):
+        for j, cell in enumerate(grid[i]):
+            if cell == ".":
                 return (i, j)
     return None
 
@@ -148,21 +148,19 @@ def check_solution(solution: tp.List[tp.List[str]]) -> bool:
     size = len(solution)
     block_size = int(size**0.5)
 
-    for row in solution:
+    for row_idx in range(size):
+        row = get_row(solution, (row_idx, 0))
         if len(set(row)) != size or "." in set(row):
             return False
 
-    for col in range(size):
-        column = [solution[row][col] for row in range(size)]
-        if len(set(column)) != size or "." in set(column):
+    for col_idx in range(size):
+        col = get_col(solution, (0, col_idx))
+        if len(set(col)) != size or "." in set(col):
             return False
 
     for block_row in range(0, size, block_size):
         for block_col in range(0, size, block_size):
-            block = []
-            for i in range(block_row, block_row + block_size):
-                for j in range(block_col, block_col + block_size):
-                    block.append(solution[i][j])
+            block = get_block(solution, (block_row, block_col))
             if len(set(block)) != size or "." in set(block):
                 return False
 
