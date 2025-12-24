@@ -145,20 +145,12 @@ class GameOfLife:
         out : Grid
             Новое поколение клеток.
         """
-        new_grid = self.create_grid(randomize=False)
-
-        for y in range(self.cell_height):
-            for x in range(self.cell_width):
+        new_grid = self.create_grid(False)
+        for x in range(0, self.cell_height):
+            for y in range(0, self.cell_width):
                 neighbours = self.get_neighbours((x, y))
-                alive_count = sum(neighbours)
-
-                if self.grid[y][x] == 1:
-                    # Живая клетка
-                    if alive_count in (2, 3):
-                        new_grid[y][x] = 1
-                else:
-                    # Мёртвая клетка
-                    if alive_count == 3:
-                        new_grid[y][x] = 1
-
+                if self.grid[x][y] and 2 <= sum(neighbours) <= 3:
+                    new_grid[x][y] = 1
+                elif not self.grid[x][y] and sum(neighbours) == 3:
+                    new_grid[x][y] = 1
         return new_grid

@@ -54,21 +54,16 @@ class GameOfLife:
         return neighbours
 
     def get_next_generation(self) -> Grid:
-        new_grid = self.create_grid(randomize=False)
-
-        for y in range(self.rows):
-            for x in range(self.cols):
+        new_gen = self.create_grid(False)
+        for x in range(0, self.rows):
+            for y in range(0, self.cols):
                 neighbours = self.get_neighbours((x, y))
-                alive_count = sum(neighbours)
-
-                if self.curr_generation[y][x] == 1:
-                    if alive_count in (2, 3):
-                        new_grid[y][x] = 1
-                else:
-                    if alive_count == 3:
-                        new_grid[y][x] = 1
-
-        return new_grid
+                if self.curr_generation[x][y] and 2 <= sum(neighbours) <= 3:
+                    new_gen[x][y] = 1
+                elif not self.curr_generation[x][y] and sum(neighbours) == 3:
+                    new_gen[x][y] = 1
+        self.generations += 1
+        return new_gen
 
     def step(self) -> None:
         """
