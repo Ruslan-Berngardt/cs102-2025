@@ -127,15 +127,12 @@ class GameOfLife:
         x, y = cell
         neighbours = []
 
-        for dy in (-1, 0, 1):
-            for dx in (-1, 0, 1):
-                if dx == 0 and dy == 0:
-                    continue
-
-                nx, ny = x + dx, y + dy
-
-                if 0 <= nx < self.cols and 0 <= ny < self.rows:
-                    neighbours.append(self.grid[ny][nx])
+        for i in range(-1, 2):
+            for j in range(-1, 2):
+                if (x, y) != (x + i, y + j):
+                    new_x, new_y = x + i, y + j
+                    if 0 <= new_x < self.rows and 0 <= new_y < self.cols:
+                        neighbours.append(self.grid[new_x][new_y])
 
         return neighbours
 
