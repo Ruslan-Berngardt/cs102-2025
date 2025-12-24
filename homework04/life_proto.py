@@ -14,7 +14,8 @@ class GameOfLife:
         self.width = width
         self.height = height
         self.cell_size = cell_size
-
+        self.cols = self.width // self.cell_size
+        self.rows = self.height // self.cell_size
         # Устанавливаем размер окна
         self.screen_size = width, height
         # Создание нового окна
@@ -133,7 +134,7 @@ class GameOfLife:
 
                 nx, ny = x + dx, y + dy
 
-                if 0 <= nx < self.cell_width and 0 <= ny < self.cell_height:
+                if 0 <= nx < self.cols and 0 <= ny < self.rows:
                     neighbours.append(self.grid[ny][nx])
                 else:
                     neighbours.append(0)
