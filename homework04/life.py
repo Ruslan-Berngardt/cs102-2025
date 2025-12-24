@@ -41,8 +41,8 @@ class GameOfLife:
         return grid
 
     def get_neighbours(self, cell: Cell) -> Cells:
-        neighbours: Cells = []
         x, y = cell
+        neighbours = []
 
         for dy in (-1, 0, 1):
             for dx in (-1, 0, 1):
@@ -53,6 +53,8 @@ class GameOfLife:
 
                 if 0 <= nx < self.cols and 0 <= ny < self.rows:
                     neighbours.append(self.curr_generation[ny][nx])
+                else:
+                    neighbours.append(0)
 
         return neighbours
 
