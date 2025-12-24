@@ -53,8 +53,6 @@ class GameOfLife:
 
                 if 0 <= nx < self.cols and 0 <= ny < self.rows:
                     neighbours.append(self.curr_generation[ny][nx])
-                else:
-                    neighbours.append(0)
 
         return neighbours
 
